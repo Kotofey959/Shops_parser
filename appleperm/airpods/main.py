@@ -1,13 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
+from appleperm.templates.main import user_agent
 
 
 def airpods_price():
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 YaBrowser/23.1.1.1135 Yowser/2.5 Safari/537.36'
-    }
 
-    src = requests.get('https://appleperm.ru/76_apple-air-pods', headers=headers).text
+    src = requests.get('https://appleperm.ru/76_apple-air-pods', headers=user_agent).text
     soup = BeautifulSoup(src, 'lxml')
     titles = soup.find_all('h3')
     titles_list = []
@@ -21,6 +19,3 @@ def airpods_price():
 
     res = dict(zip(titles_list, coasts_list))
     return res
-
-
-airpods_price()
